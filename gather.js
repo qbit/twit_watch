@@ -62,23 +62,21 @@ io.on('connection', function(socket){
 	}, 100);
 });
 
-t.stream( 'statuses/filter', { track: 'openbsd' }, function( str ) {
+t.stream( 'statuses/filter', { track: 'openbsd,node.js,nodejs,devio.us,devious,twss' }, function( str ) {
 	str.on( 'tweet', function( tw ) {
-		console.log( 'openbsd', tw.text );
-		buffer.push( { string: 'openbsd', msg: tw.text } );
-	});
-});
-
-// t.stream( 'statuses/filter', { track: 'devio.us' }, function( str ) {
-// 	str.on( 'tweet', function( tw ) {
-// 		console.log( 'devio.us', tw.text );
-// 		buffer.push( { string: 'devio.us', msg: tw.text } );
-// 	});
-// });
-
-t.stream( 'statuses/filter', { track: 'node.js' }, function( str ) {
-	str.on( 'tweet', function( tw ) {
-		console.log( 'node.js', tw.text );
-		buffer.push( { string: 'node.js', msg: tw.text } );
+		var string = '';
+		if ( tw.text.match( /openbsd/i ) ) {
+			string = 'openbsd';
+		}
+		if ( tw.text.match( /node\.js|nodejs/i ) ) {
+			string = 'node.js';
+		}
+		if ( tw.text.match( /devio\.us|devious/i ) ) {
+			string = 'devio.us';
+		}
+		if ( tw.text.match( /twss/i ) ) {
+			string = 'twss';
+		}
+		buffer.push( { string: string, msg: tw } );
 	});
 });

@@ -14,9 +14,17 @@
 				var p = document.getElementById( obj.data.string );
 
 				var el = document.createElement('p');
-					
-				el.innerHTML = obj.data.msg;
+				var nameel = document.createElement( 'span' );
+				var text = document.createTextNode( obj.data.msg.text );
 
+				nameel.innerHTML = obj.data.msg.user.screen_name
+
+				nameel.setAttribute( 'class', 'name' );
+
+				console.log( text );
+				el.appendChild( nameel );
+				el.appendChild( text );
+					
 				p.appendChild(el);
 				p.scrollTop = 1000000;
 			}
@@ -36,11 +44,12 @@
     </script>
     
     <div class="twit" id="nodejs"><p>Node.JS</p></div>
-    <!-- <div class="twit" id="twss"><p>TWSS</p></div> -->
+    <div class="twit" id="twss"><p>TWSS</p></div>
     <div class="twit" id="openbsd"><p>OpenBSD</p></div>
-    <!-- <div class="twit" id="devio.us"><p>Devio.US</p></div> -->
+    <div class="twit" id="devio.us"><p>Devio.US</p></div>
     <style>
-      .twit { height: 500px; overflow: auto; width: 49%; border: 1px solid #eee; font: 13px Helvetica, Arial; float: left }
+		.name { background-color: #ccc; }
+      .twit { height: 500px; overflow: auto; width: 24%; border: 1px solid #eee; font: 13px Helvetica, Arial; float: left }
       .twit p { padding: 8px; margin: 0; }
       .twit p:nth-child(odd) { background: #F6F6F6; }
     </style>
