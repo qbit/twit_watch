@@ -17,7 +17,7 @@
 				var nameel = document.createElement( 'span' );
 				var text = document.createTextNode( obj.data.msg.text );
 
-				nameel.innerHTML = obj.data.msg.user.screen_name
+				nameel.innerHTML = "@" + obj.data.msg.user.screen_name + " > ";
 
 				nameel.setAttribute( 'class', 'name' );
 
