@@ -52,7 +52,7 @@ io.on('connection', function(socket){
 		if ( buffer[ item ] ) {
 			var msg = { data: buffer[ item ] };
 			socket.emit( 'message', msg );
-			if ( buffer.length < 50 ) {
+			if ( tmp_buffer.length < 50 ) {
 				tmp_buffer.push( buffer.shift() );
 			} else {
 				tmp_buffer.shift();
@@ -65,18 +65,22 @@ io.on('connection', function(socket){
 t.stream( 'statuses/filter', { track: 'openbsd,node.js,nodejs,devio.us,devious,twss' }, function( str ) {
 	str.on( 'tweet', function( tw ) {
 		var string = '';
+		// push like mad so we can have muylti column results
 		if ( tw.text.match( /openbsd/i ) ) {
 			string = 'openbsd';
+			buffer.push( { string: string, msg: tw } );
 		}
 		if ( tw.text.match( /node\.js|nodejs/i ) ) {
 			string = 'node.js';
+			buffer.push( { string: string, msg: tw } );
 		}
 		if ( tw.text.match( /devio\.us|devious/i ) ) {
 			string = 'devio.us';
+			buffer.push( { string: string, msg: tw } );
 		}
 		if ( tw.text.match( /twss/i ) ) {
 			string = 'twss';
+			buffer.push( { string: string, msg: tw } );
 		}
-		buffer.push( { string: string, msg: tw } );
 	});
 });
